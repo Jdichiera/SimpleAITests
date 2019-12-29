@@ -14,7 +14,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = (Button) findViewById(R.id.button1);
+        button = (Button) findViewById(R.id.btnSimpleStateMachineAI);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
     }
 
     public void openNewActivity() {
-        Intent intent = new Intent(this, SecondActivity.class);
+        Intent intent = new Intent(this, SimpleStateMachineAI.class);
         startActivity(intent);
     }
 }
