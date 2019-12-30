@@ -15,25 +15,11 @@ public class GameObject {
     private float length;
     private float height;
 
-    // How fast the game object can move
-    private float movementSpeed;
-
-    // Constants that we can use to tell the game how our unit is moving
-    public final int STOPPED = 0;
-    public final int UP = 1;
-    public final int RIGHT = 2;
-    public final int DOWN = 3;
-    public final int LEFT = 4;
-
-    // Holds the current movement state of our game object
-    private int movementState = STOPPED;
-
     public GameObject(int unitX, int unitY, float unitLength, float unitHeight, float unitSpeed) {
         x = unitX;
         y = unitY;
         length = unitLength;
         height = unitHeight;
-        movementSpeed = unitSpeed;
 
         gameObject = new RectF(x, y, length, height);
     }
@@ -43,35 +29,12 @@ public class GameObject {
         return gameObject;
     }
 
-    // Set the movement state of the game object
-    public void setMovementState(int movementState) {
-        this.movementState = movementState;
+    public void update() {
     }
 
-    // Moves the game object in the appropriate direction during the update call
-    public void update(long fps) {
-        switch (movementState) {
-            case UP:
-                // move up
-                y = y + movementSpeed / fps;
-                break;
-            case RIGHT:
-                // move right
-                x = x + movementSpeed / fps;
-                break;
-            case DOWN:
-                // move down
-                y = y - movementSpeed / fps;
-                break;
-            case LEFT:
-                // move left
-                x = x - movementSpeed / fps;
-                break;
-        }
-
-        gameObject.left = x;
-        gameObject.right = x + length;
-        gameObject.top = y;
-        gameObject.bottom = y - height;
+    // Sets the position of the game object
+    public void setPosition(float x, float y) {
+        this.x = x;
+        this.y = y;
     }
 }

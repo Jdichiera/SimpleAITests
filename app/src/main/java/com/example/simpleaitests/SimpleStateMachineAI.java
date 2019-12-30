@@ -26,8 +26,7 @@ public class SimpleStateMachineAI extends Activity {
     Button btnUp;
     Button btnRight;
     Button btnDown;
-    Button btnLeft
-            ;
+    Button btnLeft;
     // This is the main layout and allows us to have the game view and the button
     FrameLayout frame;
     // This holds the button and anything else we want to have on top of the game view
@@ -200,7 +199,7 @@ public class SimpleStateMachineAI extends Activity {
 
                 // Draw the score
                 paint.setTextSize(40);
-                canvas.drawText("playerX: " + player.getGameObject().centerX() + "   playerY: " + player.getGameObject().centerX(), 10, 50, paint);
+//                canvas.drawText("playerX: " + player.getGameObject().centerY() + "   playerY: " + player.getGameObject().centerX(), 10, 50, paint);
 
                 // Draw everything to the screen
                 surfaceHolder.unlockCanvasAndPost(canvas);
@@ -220,7 +219,7 @@ public class SimpleStateMachineAI extends Activity {
         // If the activity is started then we start the game thread
         public void resume() {
             playing = true;
-            gameThread = new Thread();
+            gameThread = new Thread(this);
             gameThread.start();
         }
 
@@ -235,6 +234,12 @@ public class SimpleStateMachineAI extends Activity {
 
                 // Screen is not touched
                 case MotionEvent.ACTION_UP:
+                    gameView.player.setMovementState(gameView.player.STOPPED);
+                    break;
+
+                // Screen is touched and finger dragged.
+                case MotionEvent.ACTION_MOVE:
+                    gameView.player.setPosition( motionEvent.getX(),  motionEvent.getY());
                     break;
             }
 
