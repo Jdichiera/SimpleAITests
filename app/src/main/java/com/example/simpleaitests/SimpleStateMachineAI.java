@@ -41,7 +41,8 @@ public class SimpleStateMachineAI extends Activity {
     // can override the run method for our game loop
     class GameView extends SurfaceView implements Runnable {
         Thread gameThread = null;
-        GameObject player;
+        Player player;
+        Enemy enemy;
 
         // We use SurfaceHolder to hold Canvas and Paint
         SurfaceHolder surfaceHolder;
@@ -64,7 +65,11 @@ public class SimpleStateMachineAI extends Activity {
             super(context);
             surfaceHolder = getHolder();
             paint = new Paint();
-            player = new GameObject(100, 200, 50, 100);
+            player = new Player(0, 0, 50, 100);
+            enemy = new Enemy(100, 300, 50, 100);
+
+            player.setPosition(400, 500);
+            enemy.setPosition(1300, 500);
         }
 
         // Run holds our game loop
@@ -111,9 +116,13 @@ public class SimpleStateMachineAI extends Activity {
                 // Draw the player
                 canvas.drawRect(player.getGameObject(), paint);
 
+
                 // Draw the score
                 paint.setTextSize(40);
-//                canvas.drawText("playerX: " + player.getGameObject().centerY() + "   playerY: " + player.getGameObject().centerX(), 10, 50, paint);
+                canvas.drawText("playerX: " + player.getGameObject().centerX() + "   playerY: " + player.getGameObject().centerY(), 10, 50, paint);
+
+                paint.setColor(Color.argb(255,  255, 0, 0));
+                canvas.drawRect(enemy.getGameObject(), paint);
 
                 // Draw everything to the screen
                 surfaceHolder.unlockCanvasAndPost(canvas);

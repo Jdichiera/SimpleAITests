@@ -11,11 +11,11 @@ public class GameObject {
     private float length;
     private float height;
 
-    public GameObject(int unitX, int unitY, float unitLength, float unitHeight) {
+    public GameObject(int unitLeft, int unitTop, float unitLength, float unitHeight) {
         length = unitLength;
         height = unitHeight;
 
-        gameObject = new RectF(unitX, unitY, length, height);
+        gameObject = new RectF(unitLeft, unitTop, unitLength, unitHeight);
     }
 
     // Returns the game object
@@ -28,10 +28,10 @@ public class GameObject {
     }
 
     // Sets the position of the game object
-    public void setPosition(float x, float y) {
-        gameObject.left = x;
-        gameObject.right = x + length;
-        gameObject.top = y;
-        gameObject.bottom = y - height;
+    public void setPosition(float positionX, float positionY) {
+        gameObject.left = positionX;
+        gameObject.right = positionX + length;
+        gameObject.top = positionY;
+        gameObject.bottom = positionY - height;
     }
 }
