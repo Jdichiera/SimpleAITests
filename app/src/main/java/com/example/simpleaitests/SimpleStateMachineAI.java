@@ -11,103 +11,17 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 public class SimpleStateMachineAI extends Activity {
     // Gameview holds the game loop and logic
     GameView gameView;
-    // A button for navigating back to the main menu
-    Button btnBack;
-
-    // Buttons for player movement
-    Button btnUp;
-    Button btnRight;
-    Button btnDown;
-    Button btnLeft;
-    // This is the main layout and allows us to have the game view and the button
-    FrameLayout frame;
-    // This holds the button and anything else we want to have on top of the game view
-    LinearLayout widgets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        frame = new FrameLayout(this);
         gameView = new GameView(this);
-        widgets = new LinearLayout(this);
 
-        btnBack = new Button(this);
-        btnBack.setWidth(300);
-        btnBack.setText("Back");
-        widgets.addView(btnBack);
-
-        btnUp = new Button(this);
-        btnUp.setWidth(300);
-        btnUp.setText("Up");
-        widgets.addView(btnUp);
-
-        btnRight = new Button(this);
-        btnRight.setWidth(300);
-        btnRight.setText("Right");
-        widgets.addView(btnRight);
-
-        btnDown = new Button(this);
-        btnDown.setWidth(300);
-        btnDown.setText("Down");
-        widgets.addView(btnDown);
-
-        btnLeft = new Button(this);
-        btnLeft.setWidth(300);
-        btnLeft.setText("Left");
-        widgets.addView(btnLeft);
-
-        frame.addView(gameView);
-//        frame.addView(widgets);
-        setContentView(frame);
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToMainActivity();
-            }
-        });
-
-        btnUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gameView.player.setMovementState(gameView.player.UP);
-            }
-        });
-
-        btnRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gameView.player.setMovementState(gameView.player.RIGHT);
-            }
-        });
-
-        btnDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gameView.player.setMovementState(gameView.player.DOWN);
-            }
-        });
-
-        btnLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gameView.player.setMovementState(gameView.player.LEFT);
-            }
-        });
-    }
-
-    public void goToMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        setContentView(gameView);
     }
 
     @Override
@@ -150,7 +64,7 @@ public class SimpleStateMachineAI extends Activity {
             super(context);
             surfaceHolder = getHolder();
             paint = new Paint();
-            player = new GameObject(100, 200, 50, 100, 200);
+            player = new GameObject(100, 200, 50, 100);
         }
 
         // Run holds our game loop
@@ -177,7 +91,7 @@ public class SimpleStateMachineAI extends Activity {
         // Everything that needs to update during a game frame happens here.
         // Logic, collision, etc
         public void update() {
-            player.update(fps);
+            player.update();
 
         }
 
@@ -234,7 +148,6 @@ public class SimpleStateMachineAI extends Activity {
 
                 // Screen is not touched
                 case MotionEvent.ACTION_UP:
-                    gameView.player.setMovementState(gameView.player.STOPPED);
                     break;
 
                 // Screen is touched and finger dragged.
