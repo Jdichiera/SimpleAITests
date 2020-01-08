@@ -34,4 +34,13 @@ public class GameObject {
         gameObject.top = positionY;
         gameObject.bottom = positionY - height;
     }
+
+    // Gives the dimensions
+    public float getX() {
+        return this.gameObject.centerX();
+    }
+
+    public float getY() {
+        return this.gameObject.centerY();
+    }
 }

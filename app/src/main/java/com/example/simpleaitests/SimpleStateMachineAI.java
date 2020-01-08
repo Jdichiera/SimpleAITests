@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -119,10 +120,21 @@ public class SimpleStateMachineAI extends Activity {
 
                 // Draw the score
                 paint.setTextSize(40);
-                canvas.drawText("playerX: " + player.getGameObject().centerX() + "   playerY: " + player.getGameObject().centerY(), 10, 50, paint);
+                canvas.drawText("playerX: " + player.getGameObject().centerX() +
+                        " playerY: " + player.getGameObject().centerY(), 10, 50, paint);
+                canvas.drawText("Detected: " + enemy.isEnemyDetected(), 10, 100, paint);
 
+                // Draw the enemy and detectection circle
                 paint.setColor(Color.argb(255,  255, 0, 0));
                 canvas.drawRect(enemy.getGameObject(), paint);
+
+                // set the paint style to stroke to draw unfilled shape
+                paint.setStyle(Paint.Style.STROKE);
+//                canvas.drawCircle(enemy.getX(), enemy.getY(), enemy.getDetectionRadius(), paint);
+                // Starting with a rectangle then moving to circle.
+                RectF tempEnemy = enemy.getGameObject();
+                canvas.drawRect(new RectF(tempEnemy.left - 400, tempEnemy.top - 400, tempEnemy.right + 400, tempEnemy.bottom + 400), paint);
+                paint.setStyle(Paint.Style.FILL);
 
                 // Draw everything to the screen
                 surfaceHolder.unlockCanvasAndPost(canvas);
