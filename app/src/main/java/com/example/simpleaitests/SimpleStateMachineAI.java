@@ -71,6 +71,7 @@ public class SimpleStateMachineAI extends Activity {
 
             player.setPosition(400, 500);
             enemy.setPosition(1300, 500);
+//            enemy.setDetectionAreaPosition(enemy.getX(), enemy.getY());
         }
 
         // Run holds our game loop
@@ -98,6 +99,7 @@ public class SimpleStateMachineAI extends Activity {
         // Logic, collision, etc
         public void update() {
             player.update();
+            enemy.update();
 
         }
 
@@ -115,7 +117,8 @@ public class SimpleStateMachineAI extends Activity {
                 paint.setColor(Color.argb(255,  255, 255, 255));
 
                 // Draw the player
-                canvas.drawRect(player.getGameObject(), paint);
+//                canvas.drawRect(player.getGameObject(), paint);
+                player.draw(canvas, paint);
 
 
                 // Draw the score
@@ -126,15 +129,8 @@ public class SimpleStateMachineAI extends Activity {
 
                 // Draw the enemy and detectection circle
                 paint.setColor(Color.argb(255,  255, 0, 0));
-                canvas.drawRect(enemy.getGameObject(), paint);
-
-                // set the paint style to stroke to draw unfilled shape
-                paint.setStyle(Paint.Style.STROKE);
-//                canvas.drawCircle(enemy.getX(), enemy.getY(), enemy.getDetectionRadius(), paint);
-                // Starting with a rectangle then moving to circle.
-                RectF tempEnemy = enemy.getGameObject();
-                canvas.drawRect(new RectF(tempEnemy.left - 400, tempEnemy.top - 400, tempEnemy.right + 400, tempEnemy.bottom + 400), paint);
-                paint.setStyle(Paint.Style.FILL);
+//                canvas.drawRect(enemy.getGameObject(), paint);
+                enemy.draw(canvas, paint);
 
                 // Draw everything to the screen
                 surfaceHolder.unlockCanvasAndPost(canvas);
@@ -158,6 +154,10 @@ public class SimpleStateMachineAI extends Activity {
             gameThread.start();
         }
 
+        // Check for player and enemy detection radius collision
+//        public Boolean isColliding(GameObject player, GameObject enemy) {
+//            return true;
+//        }
         // SurfaceView implements OnTouchListener so we can override ontouchEvent to detect screen touches
         @Override
         public boolean onTouchEvent(MotionEvent motionEvent) {

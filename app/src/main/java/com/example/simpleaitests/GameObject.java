@@ -1,5 +1,7 @@
 package com.example.simpleaitests;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.RectF;
 
 // We will extend new objects from this class to make the player and enemy game objects
@@ -25,6 +27,10 @@ public class GameObject {
 
     public void update() {
 
+    }
+
+    public void draw(Canvas canvas, Paint paint) {
+        canvas.drawRect(gameObject, paint);
     }
 
     // Sets the position of the game object
