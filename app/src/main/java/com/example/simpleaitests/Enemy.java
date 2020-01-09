@@ -6,28 +6,30 @@ import android.graphics.RectF;
 
 public class Enemy extends GameObject {
     Boolean enemyDetected = false;
-//    Integer detectionRadius = 350;
-//    RectF detectionArea;
+    Integer detectionRadius = 300;
+    RectF detectionArea;
 
     public Enemy(int unitX, int unitY, float unitLength, float unitHeight) {
         super(unitX, unitY, unitLength, unitHeight);
-//        detectionArea = new RectF(
-//                unitX - detectionRadius,
-//                unitY - detectionRadius,
-//                unitLength + detectionRadius,
-//                unitHeight + detectionRadius);
+        detectionArea = new RectF(
+                gameObject.left - detectionRadius,
+                gameObject.top - detectionRadius,
+                gameObject.right + detectionRadius,
+                gameObject.bottom + detectionRadius
+        );
     }
 
     public void setEnemyDetected(Boolean enemyDetected) {
+
         this.enemyDetected = enemyDetected;
     }
 
     // Sets the position of the detection area
 //    public void setDetectionAreaPosition(float positionX, float positionY) {
-//        detectionArea.left = positionX - detectionRadius;
-//        detectionArea.right = positionX + detectionArea.width() - detectionRadius;
-//        detectionArea.top = positionY + detectionRadius;
-//        detectionArea.bottom = positionY - detectionArea.height() + detectionRadius;
+//        detectionArea.left = gameObject.left - detectionRadius;
+//        detectionArea.top = gameObject.top - detectionRadius;
+//        detectionArea.right = gameObject.right + detectionRadius;
+//        detectionArea.bottom = gameObject.bottom  + detectionRadius;
 //    }
 
     public Boolean isEnemyDetected() {
@@ -38,11 +40,12 @@ public class Enemy extends GameObject {
 //        return detectionRadius;
 //    }
 //
-//    public RectF getDetectionArea() {
-//        return detectionArea;
-//    }
+    public RectF getDetectionArea() {
+        return detectionArea;
+    }
 
     public void update() {
+//        setDetectionAreaPosition(getX(), getY());
 
     }
 
@@ -54,7 +57,7 @@ public class Enemy extends GameObject {
 //                canvas.drawCircle(enemy.getX(), enemy.getY(), enemy.getDetectionRadius(), paint);
         // Starting with a rectangle then moving to circle.
         RectF t = getGameObject();
-        canvas.drawRect(new RectF(t.left - 300, t.top - 300, t.right + 300, t.bottom + 300), paint);
+        canvas.drawRect(new RectF(t.left - detectionRadius, t.top - detectionRadius, t.right + detectionRadius, t.bottom + detectionRadius), paint);
         paint.setStyle(Paint.Style.FILL);
     }
 

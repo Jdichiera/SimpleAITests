@@ -7,7 +7,7 @@ import android.graphics.RectF;
 // We will extend new objects from this class to make the player and enemy game objects
 public class GameObject {
     // Our game object will be a rectangle
-    private RectF gameObject;
+    protected RectF gameObject;
 
     // The dimensions of our object
     private float length;
@@ -27,6 +27,7 @@ public class GameObject {
 
     public void update() {
 
+
     }
 
     public void draw(Canvas canvas, Paint paint) {
@@ -43,10 +44,18 @@ public class GameObject {
 
     // Gives the dimensions
     public float getX() {
-        return this.gameObject.centerX();
+        return gameObject.centerX();
     }
 
     public float getY() {
-        return this.gameObject.centerY();
+        return gameObject.centerY();
+    }
+
+    public float getWidth() {
+        return gameObject.width();
+    }
+
+    public float getHeight() {
+        return gameObject.height();
     }
 }

@@ -71,7 +71,6 @@ public class SimpleStateMachineAI extends Activity {
 
             player.setPosition(400, 500);
             enemy.setPosition(1300, 500);
-//            enemy.setDetectionAreaPosition(enemy.getX(), enemy.getY());
         }
 
         // Run holds our game loop
@@ -98,6 +97,7 @@ public class SimpleStateMachineAI extends Activity {
         // Everything that needs to update during a game frame happens here.
         // Logic, collision, etc
         public void update() {
+            isColliding();
             player.update();
             enemy.update();
 
@@ -123,9 +123,24 @@ public class SimpleStateMachineAI extends Activity {
 
                 // Draw the score
                 paint.setTextSize(40);
-                canvas.drawText("playerX: " + player.getGameObject().centerX() +
-                        " playerY: " + player.getGameObject().centerY(), 10, 50, paint);
-                canvas.drawText("Detected: " + enemy.isEnemyDetected(), 10, 100, paint);
+                canvas.drawText("p-left: " + player.getGameObject().left
+                        + " p-right: " + player.getGameObject().right
+                        + " p-top: " + player.getGameObject().top
+                        + " p-bottom: " + player.getGameObject().bottom, 10, 50, paint);
+
+                canvas.drawText("e-left: " + (enemy.getGameObject().left - enemy.detectionRadius)
+                        + " e-right: " + (enemy.getGameObject().right + enemy.detectionRadius)
+                        + " e-top: " + (enemy.getGameObject().top - enemy.detectionRadius)
+                        + " e-bottom: " + (enemy.getGameObject().bottom + enemy.detectionRadius), 10, 100, paint);
+
+
+
+
+//                canvas.drawText("playerX: " + player.getGameObject().centerX() +
+//                        " playerY: " + player.getGameObject().centerY(), 10, 50, paint);
+//                canvas.drawText("enemyDetectX: " + player.getGameObject().centerX() +
+//                        " playerY: " + player.getGameObject().centerY(), 10, 50, paint);
+                canvas.drawText("Detected: " + enemy.isEnemyDetected(), 10, 200, paint);
 
                 // Draw the enemy and detectection circle
                 paint.setColor(Color.argb(255,  255, 0, 0));
@@ -155,9 +170,31 @@ public class SimpleStateMachineAI extends Activity {
         }
 
         // Check for player and enemy detection radius collision
-//        public Boolean isColliding(GameObject player, GameObject enemy) {
-//            return true;
-//        }
+        public void isColliding() {
+            if (isHorizontalCollision() && isVerticalCollision()) {
+                enemy.setEnemyDetected(true);
+            } else {
+                enemy.setEnemyDetected(false);
+            }
+        }
+
+        public Boolean isHorizontalCollision() {
+            if (player.getGameObject().right > enemy.getGameObject().left - enemy.detectionRadius
+                    && player.getGameObject().left < enemy.getGameObject().right + enemy.detectionRadius) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public Boolean isVerticalCollision() {
+            if (player.getGameObject().top > enemy.getGameObject().top - enemy.detectionRadius
+                    && player.getGameObject().bottom < enemy.getGameObject().bottom + enemy.detectionRadius) {
+                return true;
+            } else {
+                return false;
+            }
+        }
         // SurfaceView implements OnTouchListener so we can override ontouchEvent to detect screen touches
         @Override
         public boolean onTouchEvent(MotionEvent motionEvent) {
