@@ -120,18 +120,10 @@ public class SimpleStateMachineAI extends Activity {
                 // Draw some text info
                 paint.setColor(Color.argb(255,  255, 255, 255));
                 paint.setTextSize(40);
-//                canvas.drawText("p-left: " + player.getGameObject().left
-//                        + " p-right: " + player.getGameObject().right
-//                        + " p-top: " + player.getGameObject().top
-//                        + " p-bottom: " + player.getGameObject().bottom, 10, 50, paint);
-//
-//                canvas.drawText("e-left: " + (enemy.getGameObject().left - enemy.detectionRadius)
-//                        + " e-right: " + (enemy.getGameObject().right + enemy.detectionRadius)
-//                        + " e-top: " + (enemy.getGameObject().top - enemy.detectionRadius)
-//                        + " e-bottom: " + (enemy.getGameObject().bottom + enemy.detectionRadius), 10, 100, paint);
 
-                canvas.drawText("Detected: " + enemy.isEnemyDetected(), 10, 50, paint);
-                canvas.drawText("Enemy State: " + enemy.enemyState.activeState.name(), 10, 100, paint);
+                canvas.drawText("Enemy State: " + enemy.enemyState.activeState.name(), 10, 50, paint);
+                canvas.drawText("Enemy Sighted: " + enemy.isEnemyDetected() + " Time: " + enemy.getEnemyDetectedTime(), 10, 100, paint);
+                canvas.drawText("Enemy Sighted: " + enemy.isEnemySighted(), 10, 150, paint);
 
                 // Draw the enemy and detection area
                 enemy.draw(canvas, paint);
@@ -161,9 +153,9 @@ public class SimpleStateMachineAI extends Activity {
         // Check for player and enemy detection radius collision
         public void isColliding() {
             if (isHorizontalCollision() && isVerticalCollision()) {
-                enemy.setEnemyDetected(true);
+                enemy.setEnemyDetected(true, System.currentTimeMillis());
             } else {
-                enemy.setEnemyDetected(false);
+                enemy.setEnemyDetected(false, 0L);
             }
         }
 

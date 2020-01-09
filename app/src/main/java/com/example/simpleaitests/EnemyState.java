@@ -8,7 +8,8 @@ import android.graphics.RectF;
 public class EnemyState {
     public enum State {
         IDLE,
-        DETECTED
+        DETECTED,
+        SEEN
     }
 
     public State activeState;
@@ -27,6 +28,9 @@ public class EnemyState {
                 paint.setColor(Color.argb(255,  0, 200, 0));
                 break;
             case DETECTED:
+                paint.setColor(Color.argb(255,  255, 255, 0));
+                break;
+            case SEEN:
                 paint.setColor(Color.argb(255,  255, 0, 0));
                 break;
         }
