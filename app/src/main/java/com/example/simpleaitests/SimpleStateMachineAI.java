@@ -70,7 +70,6 @@ public class SimpleStateMachineAI extends Activity {
             enemy = new Enemy(100, 300, 50, 100);
 
             player.setPosition(400, 500);
-            enemy.setPosition(1300, 500);
         }
 
         // Run holds our game loop
@@ -98,6 +97,7 @@ public class SimpleStateMachineAI extends Activity {
         // Logic, collision, etc
         public void update() {
             isColliding();
+            enemy.getState().update(enemy);
         }
 
         // Draw the scene
@@ -150,9 +150,9 @@ public class SimpleStateMachineAI extends Activity {
         // Check for player and enemy detection radius collision
         public void isColliding() {
             if (isHorizontalCollision() && isVerticalCollision()) {
-                enemy.setEnemyDetected(true, System.currentTimeMillis());
+                enemy.setEnemyDetected(true);
             } else {
-                enemy.setEnemyDetected(false, 0L);
+                enemy.setEnemyDetected(false);
             }
         }
 

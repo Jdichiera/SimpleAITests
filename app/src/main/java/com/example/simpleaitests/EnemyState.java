@@ -18,7 +18,18 @@ public class EnemyState {
         activeState = state;
     }
 
-    public void draw(GameObject enemy, Canvas canvas, Paint paint) {
+    public void update(Enemy enemy) {
+        switch (activeState) {
+            case IDLE:
+                break;
+            case DETECTED:
+                break;
+            case SEEN:
+                break;
+        }
+    }
+
+    public void draw(Enemy enemy, Canvas canvas, Paint paint) {
         switch (activeState) {
             case IDLE:
                 paint.setColor(Color.argb(255,  0, 200, 0));
