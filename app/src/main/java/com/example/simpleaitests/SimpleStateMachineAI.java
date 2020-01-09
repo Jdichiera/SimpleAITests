@@ -98,9 +98,6 @@ public class SimpleStateMachineAI extends Activity {
         // Logic, collision, etc
         public void update() {
             isColliding();
-            player.update();
-            enemy.update();
-
         }
 
         // Draw the scene
@@ -126,7 +123,7 @@ public class SimpleStateMachineAI extends Activity {
                 canvas.drawText("Enemy Sighted: " + enemy.isEnemySighted(), 10, 150, paint);
 
                 // Draw the enemy and detection area
-                enemy.draw(canvas, paint);
+                enemy.getState().draw(enemy, canvas, paint);
 
                 // Draw everything to the screen
                 surfaceHolder.unlockCanvasAndPost(canvas);

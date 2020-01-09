@@ -20,6 +20,9 @@ public class Enemy extends GameObject {
         enemyState.setState(EnemyState.State.IDLE);
     }
 
+    public EnemyState getState() {
+        return enemyState;
+    }
     public void setEnemyDetected(Boolean enemyDetected, Long playerDetectionStartTime) {
         if (enemyDetectedStartTime == 0) {
             enemyDetectedStartTime = playerDetectionStartTime;
@@ -51,9 +54,6 @@ public class Enemy extends GameObject {
         return enemyDetected;
     }
 
-    public void draw(Canvas canvas, Paint paint) {
-        enemyState.draw(this, canvas, paint);
-    }
 
     public void update() {
 

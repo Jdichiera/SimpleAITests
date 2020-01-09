@@ -27,7 +27,6 @@ public class GameObject {
 
     public void update() {
 
-
     }
 
     public void draw(Canvas canvas, Paint paint) {
@@ -40,22 +39,5 @@ public class GameObject {
         gameObject.right = positionX + length;
         gameObject.top = positionY;
         gameObject.bottom = positionY - height;
-    }
-
-    // Gives the dimensions
-    public float getX() {
-        return gameObject.centerX();
-    }
-
-    public float getY() {
-        return gameObject.centerY();
-    }
-
-    public float getWidth() {
-        return gameObject.width();
-    }
-
-    public float getHeight() {
-        return gameObject.height();
     }
 }

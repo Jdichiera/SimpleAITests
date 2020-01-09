@@ -18,10 +18,6 @@ public class EnemyState {
         activeState = state;
     }
 
-    public void update() {
-
-    }
-
     public void draw(GameObject enemy, Canvas canvas, Paint paint) {
         switch (activeState) {
             case IDLE:
