@@ -113,38 +113,27 @@ public class SimpleStateMachineAI extends Activity {
                 // Draw the background
                 canvas.drawColor(Color.argb(255,  0, 0, 0));
 
-                // Set the brush color that you draw with
-                paint.setColor(Color.argb(255,  255, 255, 255));
-
                 // Draw the player
-//                canvas.drawRect(player.getGameObject(), paint);
+                paint.setColor(Color.argb(255,  0, 200, 255));
                 player.draw(canvas, paint);
 
-
-                // Draw the score
+                // Draw some text info
+                paint.setColor(Color.argb(255,  255, 255, 255));
                 paint.setTextSize(40);
-                canvas.drawText("p-left: " + player.getGameObject().left
-                        + " p-right: " + player.getGameObject().right
-                        + " p-top: " + player.getGameObject().top
-                        + " p-bottom: " + player.getGameObject().bottom, 10, 50, paint);
+//                canvas.drawText("p-left: " + player.getGameObject().left
+//                        + " p-right: " + player.getGameObject().right
+//                        + " p-top: " + player.getGameObject().top
+//                        + " p-bottom: " + player.getGameObject().bottom, 10, 50, paint);
+//
+//                canvas.drawText("e-left: " + (enemy.getGameObject().left - enemy.detectionRadius)
+//                        + " e-right: " + (enemy.getGameObject().right + enemy.detectionRadius)
+//                        + " e-top: " + (enemy.getGameObject().top - enemy.detectionRadius)
+//                        + " e-bottom: " + (enemy.getGameObject().bottom + enemy.detectionRadius), 10, 100, paint);
 
-                canvas.drawText("e-left: " + (enemy.getGameObject().left - enemy.detectionRadius)
-                        + " e-right: " + (enemy.getGameObject().right + enemy.detectionRadius)
-                        + " e-top: " + (enemy.getGameObject().top - enemy.detectionRadius)
-                        + " e-bottom: " + (enemy.getGameObject().bottom + enemy.detectionRadius), 10, 100, paint);
+                canvas.drawText("Detected: " + enemy.isEnemyDetected(), 10, 50, paint);
+                canvas.drawText("Enemy State: " + enemy.enemyState.activeState.name(), 10, 100, paint);
 
-
-
-
-//                canvas.drawText("playerX: " + player.getGameObject().centerX() +
-//                        " playerY: " + player.getGameObject().centerY(), 10, 50, paint);
-//                canvas.drawText("enemyDetectX: " + player.getGameObject().centerX() +
-//                        " playerY: " + player.getGameObject().centerY(), 10, 50, paint);
-                canvas.drawText("Detected: " + enemy.isEnemyDetected(), 10, 200, paint);
-
-                // Draw the enemy and detectection circle
-                paint.setColor(Color.argb(255,  255, 0, 0));
-//                canvas.drawRect(enemy.getGameObject(), paint);
+                // Draw the enemy and detection area
                 enemy.draw(canvas, paint);
 
                 // Draw everything to the screen
